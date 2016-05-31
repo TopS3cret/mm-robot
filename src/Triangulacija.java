@@ -5,6 +5,8 @@ import Strukture.*;
 import Delaunay.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 // Glej metodo main za primer
@@ -69,7 +71,17 @@ public class Triangulacija {
                 for(int i=0; i<ovire.length; i++){
                     ArrayList<Pnt> oviraPnt = pretvoriVPnt(ovire[i].tocke.toArray(new Tocka[0]));
                     if(oviraPnt.containsAll(t)){
-                        vOviri=true;
+                        ArrayList<Pnt> temp_tr = new ArrayList<Pnt>(t);
+                        Collections.sort(temp_tr, new PointOrderComparator(oviraPnt));
+                        Tocka a = new Tocka(t.get(0).coord(0), t.get(0).coord(1));
+                        Tocka b = new Tocka(t.get(1).coord(0), t.get(1).coord(1));
+                        Tocka c = new Tocka(t.get(2).coord(0), t.get(2).coord(1));
+                        Trikotnik trikotnik=new Trikotnik(a,b,c);
+                        if(trikotnik.isPositivelyOriented())
+                            vOviri=true;
+                        else{
+                            System.out.println("KONKAVA");
+                        }
                     }
                 }
                 if(!vOviri){
@@ -77,6 +89,7 @@ public class Triangulacija {
                     Tocka b = new Tocka(t.get(1).coord(0), t.get(1).coord(1));
                     Tocka c = new Tocka(t.get(2).coord(0), t.get(2).coord(1));
                     Trikotnik trikotnik=new Trikotnik(a,b,c);
+                    trikotnik.fixOrientation();
                     res.add(trikotnik);
                 }
             }
@@ -108,15 +121,19 @@ public class Triangulacija {
         o1.tocke.add(new Tocka(5,5));
         o1.tocke.add(new Tocka(7,5));
         o1.tocke.add(new Tocka(6,8));
+        o1.complete();
 
         // pravokotnik
         Ovira o2 = new Ovira();
         o2.tocke.add(new Tocka(50,50));
         o2.tocke.add(new Tocka(55,50));
+        o2.tocke.add(new Tocka(53,52));
+        o2.tocke.add(new Tocka(53,54));
         o2.tocke.add(new Tocka(55,55));
         o2.tocke.add(new Tocka(50,55));
+        o2.complete();
 
-        Ovira[] ovire = {o1};
+        Ovira[] ovire = {o2};
 
         // robove in ovire pošljemo v triangulacijo
         Triangulacija t = new Triangulacija(robovi, ovire);
@@ -130,6 +147,16 @@ public class Triangulacija {
         }
     }
 
+    static class PointOrderComparator implements Comparator<Pnt>{
+        ArrayList<Pnt> ovira;
+        public PointOrderComparator(ArrayList<Pnt> ovira){
+            this.ovira = ovira;
+        }
+        @Override
+        public int compare(Pnt o1, Pnt o2) {
+            return Integer.compare(ovira.indexOf(o1), ovira.indexOf(o2));
+        }
+    }
 
 
 }
