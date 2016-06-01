@@ -21,4 +21,10 @@ public class Tocka{
     public String toString() {
         return String.format("(%.0f,%.0f)", x,y);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Tocka t = (Tocka)obj;
+        return (this.x == t.x && this.y == t.y);
+    }
 }
