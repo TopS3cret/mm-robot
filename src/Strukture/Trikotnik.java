@@ -1,5 +1,7 @@
 package Strukture;
 
+import Dijkstra.Vozlisce;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +11,11 @@ import java.util.List;
  */
 public class Trikotnik {
     public Tocka ogljisca[];
+    public Tocka t;
+    public Tocka ab;
+    public Tocka ac;
+    public Tocka bc;
+    public Vozlisce v;
 
     public Trikotnik(){
         ogljisca = new Tocka[3];
@@ -46,6 +53,35 @@ public class Trikotnik {
         List<Tocka> arr = Arrays.asList(ogljisca);
         Collections.reverse(arr);
         ogljisca = arr.toArray(ogljisca);
+    }
+
+    public void izracunajTezisce(){
+        Tocka a = ogljisca[0];
+        Tocka b = ogljisca[1];
+        Tocka c = ogljisca[2];
+
+        double x=(a.x+b.x+c.x)/3;
+
+        double y=(a.y+b.y+c.y)/3;
+
+        t = new Tocka(x,y);
+    }
+
+    public void izracunajSredisca(){
+        ab = vrniSredisceDaljice(ogljisca[0], ogljisca[1]);
+        ac = vrniSredisceDaljice(ogljisca[0], ogljisca[2]);
+        bc = vrniSredisceDaljice(ogljisca[1], ogljisca[2]);
+    }
+
+    public static Tocka vrniSredisceDaljice(Tocka a, Tocka b){
+        double x=(a.x-b.x)/2;
+        x=a.x-x;
+
+        double y=(a.y-b.y)/2;
+        y=a.y-y;
+
+        Tocka ab = new Tocka(x,y);
+        return ab;
     }
 
     @Override

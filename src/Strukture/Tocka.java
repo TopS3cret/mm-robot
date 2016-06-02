@@ -17,6 +17,10 @@ public class Tocka{
         this.y = y;
     }
 
+    public static double razdalja(Tocka t1, Tocka t2){
+        return Math.sqrt((t1.x-t2.x)*(t1.x-t2.x)+(t1.y-t2.y)*(t1.y-t2.y));
+    }
+
     @Override
     public String toString() {
         return String.format("(%.0f,%.0f)", x,y);

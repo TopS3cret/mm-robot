@@ -1,4 +1,5 @@
-
+import Dijkstra.Dijkstra;
+import Dijkstra.Vozlisce;
 import Strukture.Ovira;
 import Strukture.Tocka;
 import Strukture.Trikotnik;
@@ -201,6 +202,10 @@ class RobotPanel extends JPanel implements MouseListener{
     boolean addingObject = false;
     ArrayList<Tocka> addedObject;
     ArrayList<Ovira> ovire;
+    Tocka[] povezava;
+
+    Tocka zacetek;
+    Tocka konec;
     
     Trikotnik[] trikotniki;
     
@@ -208,7 +213,10 @@ class RobotPanel extends JPanel implements MouseListener{
         addedObject = new ArrayList<>();
         ovire = new ArrayList<Ovira>();
         trikotniki = new Trikotnik[0];
+        povezava = new Tocka[0];
         super.addMouseListener(this);
+        zacetek = new Tocka(0,0);
+        konec = new Tocka(getWidth(), getHeight());
     }
     
     @Override
@@ -219,6 +227,7 @@ class RobotPanel extends JPanel implements MouseListener{
         paintOvire(g);
         paintTrikotniki(g);
         paintAddedObject(g);
+        paintPovezava(g);
         
     }
     
@@ -271,6 +280,18 @@ class RobotPanel extends JPanel implements MouseListener{
                 g.drawOval((int)t.x-2, (int)t.y-2, 4, 4);
             }
             
+        }
+    }
+
+    void paintPovezava(Graphics g){
+        for(int n=0; n<povezava.length-1; n++){
+
+            Tocka t1 = povezava[n];
+            Tocka t2 = povezava[n+1];
+
+            g.setColor(Color.blue);
+            g.drawLine((int)t1.x, (int)t1.y, (int)t2.x, (int)t2.y);
+
         }
     }
     
@@ -340,6 +361,10 @@ class RobotPanel extends JPanel implements MouseListener{
         };
         Triangulacija t = new Triangulacija(robovi, ovire.toArray(new Ovira[0]));
         trikotniki = t.izracunaj();
+
+        ArrayList<Vozlisce> vozlisca= graf.izdelajGraf(zacetek, konec, trikotniki);
+        povezava = Dijkstra.izvediDijkstro(vozlisca, vozlisca.get(0), vozlisca.get(vozlisca.size()-1));
+
         repaint();
     }
     
@@ -348,6 +373,7 @@ class RobotPanel extends JPanel implements MouseListener{
         this.ovire.clear();
         this.addedObject.clear();
         this.setAddingObject(false);
+        this.povezava = new Tocka[0];
         repaint();
     }
     
