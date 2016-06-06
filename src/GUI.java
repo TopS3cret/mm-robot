@@ -313,7 +313,6 @@ class RobotPanel extends JPanel implements MouseListener{
 
     void paintPovezava(Graphics g){
         for(int n=0; n<povezava.length-1; n++){
-
             Tocka t1 = povezava[n];
             Tocka t2 = povezava[n+1];
 
@@ -411,6 +410,8 @@ class RobotPanel extends JPanel implements MouseListener{
 
         ArrayList<Vozlisce> vozlisca= graf.izdelajGraf(zacetek, konec, trikotniki);
         povezava = Dijkstra.izvediDijkstro(vozlisca, vozlisca.get(0), vozlisca.get(vozlisca.size()-1));
+
+        povezava = NaravniZlepek.sestaviZlepek(povezava, 10);
 
         repaint();
     }
