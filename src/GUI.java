@@ -49,8 +49,9 @@ public class GUI extends javax.swing.JFrame {
         btnAddObject = new javax.swing.JButton();
         btnTriangulate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        btnStartEnd = new javax.swing.JButton();
         shortestPath = new javax.swing.JButton();
-        btnStartEnd1 = new javax.swing.JButton();
+        btnSmooth = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robot");
@@ -92,17 +93,24 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        shortestPath.setText("Nastavi začetek in konec");
+        btnStartEnd.setText("Nastavi začetek in konec");
+        btnStartEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartEndActionPerformed(evt);
+            }
+        });
+
+        shortestPath.setText("Izriši najkrajšo pot");
         shortestPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 shortestPathActionPerformed(evt);
             }
         });
 
-        btnStartEnd1.setText("Izriši najkrajšo pot");
-        btnStartEnd1.addActionListener(new java.awt.event.ActionListener() {
+        btnSmooth.setText("Zgladi robove");
+        btnSmooth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartEnd1ActionPerformed(evt);
+                btnSmoothActionPerformed(evt);
             }
         });
 
@@ -110,14 +118,15 @@ public class GUI extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddObject, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTriangulate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(shortestPath, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnStartEnd1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddObject, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTriangulate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStartEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(shortestPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSmooth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,11 +135,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnAddObject)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(shortestPath)
+                .addComponent(btnStartEnd)
                 .addGap(44, 44, 44)
                 .addComponent(btnTriangulate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnStartEnd1)
+                .addComponent(shortestPath)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSmooth)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClear)
                 .addContainerGap())
@@ -175,17 +186,21 @@ public class GUI extends javax.swing.JFrame {
         robotPanel.clear();
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void shortestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shortestPathActionPerformed
+    private void btnStartEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartEndActionPerformed
         if(robotPanel.settingStartEnd){
             robotPanel.setSettingStartEnd(false);
         }else{
             robotPanel.setSettingStartEnd(true);
         }
+    }//GEN-LAST:event_btnStartEndActionPerformed
+
+    private void shortestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shortestPathActionPerformed
+        robotPanel.showShortestPath();
     }//GEN-LAST:event_shortestPathActionPerformed
 
-    private void btnStartEnd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartEnd1ActionPerformed
-        robotPanel.showShortestPath();
-    }//GEN-LAST:event_btnStartEnd1ActionPerformed
+    private void btnSmoothActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSmoothActionPerformed
+        robotPanel.zgladiRobove();
+    }//GEN-LAST:event_btnSmoothActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,7 +242,8 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddObject;
     private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnStartEnd1;
+    private javax.swing.JButton btnSmooth;
+    private javax.swing.JButton btnStartEnd;
     private javax.swing.JButton btnTriangulate;
     private javax.swing.JPanel drawPanel;
     private javax.swing.JPanel jPanel1;
@@ -438,9 +454,11 @@ class RobotPanel extends JPanel implements MouseListener{
     void showShortestPath() {
         ArrayList<Vozlisce> vozlisca= graf.izdelajGraf(zacetek, konec, trikotniki);
         povezava = Dijkstra.izvediDijkstro(vozlisca, vozlisca.get(0), vozlisca.get(vozlisca.size()-1));
-
+        repaint();
+    }
+    
+    void zgladiRobove() {
         povezava = NaravniZlepek.sestaviZlepek(povezava, 10);
-
         repaint();
     }
     

@@ -86,14 +86,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnClear" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnClear" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnAddObject" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnTriangulate" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnStartEnd" alignment="0" max="32767" attributes="0"/>
                           <Component id="shortestPath" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnStartEnd1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSmooth" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -105,11 +106,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAddObject" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="shortestPath" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnStartEnd" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="btnTriangulate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnStartEnd1" min="-2" max="-2" attributes="0"/>
+                      <Component id="shortestPath" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSmooth" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -142,20 +145,28 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClearActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="shortestPath">
+            <Component class="javax.swing.JButton" name="btnStartEnd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nastavi za&#x10d;etek in konec"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStartEndActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="shortestPath">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Izri&#x161;i najkraj&#x161;o pot"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shortestPathActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnStartEnd1">
+            <Component class="javax.swing.JButton" name="btnSmooth">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Izri&#x161;i najkraj&#x161;o pot"/>
+                <Property name="text" type="java.lang.String" value="Zgladi robove"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStartEnd1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSmoothActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
